@@ -130,4 +130,18 @@ class _InventoryHomePageState extends State<InventoryHomePage> {
       ),
     );
   }
+
+  // Update Item in Firestore
+  void _updateItem(String id, String name, int quantity) {
+    FirebaseFirestore.instance.collection('items').doc(id).update({
+      'name': name,
+      'quantity': quantity,
+      'timestamp': FieldValue.serverTimestamp(),
+    });
+  }
+
+  // Delete Item from Firestore
+  void _deleteItem(String id) {
+    FirebaseFirestore.instance.collection('items').doc(id).delete();
+  }
 }
